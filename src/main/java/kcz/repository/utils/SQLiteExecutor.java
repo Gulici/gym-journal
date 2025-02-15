@@ -9,9 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SQLiteExecutor {
     private static String dbUrl = "jdbc:sqlite:gym-journal.db";
@@ -27,7 +25,7 @@ public class SQLiteExecutor {
     }
 
     public void initDB() {
-        File f = new File(System.getProperty("user.dir") + "/gym-journal.db");
+        File f = new File(System.getProperty("user.dir") + "/" + dbUrl.substring(12));
         if(!f.exists()){
             URL initDbURL = Main.class.getClassLoader().getResource("kcz/initDb.sql");
             executeStatement(initDbURL);
@@ -35,7 +33,7 @@ public class SQLiteExecutor {
     }
 
     public void resetDB() {
-        File f = new File(System.getProperty("user.dir") + "/gym-journal.db");
+        File f = new File(System.getProperty("user.dir") + "/" + dbUrl.substring(12));
         if(f.exists()){
             dropDB();
             URL url = Main.class.getClassLoader().getResource("kcz/initDb.sql");
@@ -72,9 +70,11 @@ public class SQLiteExecutor {
     }
 
     public void executeStatement(URL sqlFilePath) {
-        try(FileReader reader = new FileReader(sqlFilePath.getPath())) {
+        try(FileReader reader = new FileReader(sqlFilePath.getPath());
+            Connection connection = getConnection()) {
+
             BufferedReader br = new BufferedReader(reader);
-            Connection connection = getConnection();
+
             Statement statement = connection.createStatement();
             System.out.println("Executing query: " + sqlFilePath);
 
@@ -124,28 +124,6 @@ public class SQLiteExecutor {
         } catch (IOException | SQLException e) {
             System.err.println(e.getMessage());
         }
-    }
-
-    public List<Map<String, Object>> selectSingleStatement(String sqlQuery) {
-        List<Map<String, Object>> result = new ArrayList<>();
-        try (Connection connection = getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(sqlQuery)) {
-
-            ResultSetMetaData metaData = resultSet.getMetaData();
-            int columnCount = metaData.getColumnCount();
-
-            while (resultSet.next()) {
-                Map<String, Object> row = new HashMap<>();
-                for (int i = 1; i <= columnCount; i++) {
-                    row.put(metaData.getColumnName(i), resultSet.getObject(i));
-                }
-                result.add(row);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return result;
     }
 
     public void dropDB() {
