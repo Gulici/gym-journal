@@ -15,15 +15,12 @@ CREATE TABLE exercises (
                            id           INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                            ex_type_id   integer(10) NOT NULL,
                            ex_detail_id integer(10) UNIQUE,
+                           w_id         integer(10),
+                           wp_id        integer(10),
                            FOREIGN KEY(ex_detail_id) REFERENCES exercise_detail(id),
-                           FOREIGN KEY(ex_type_id) REFERENCES exercise_types(id));
-CREATE TABLE exercises_workout_plans (
-                                         ex_id   integer(10) NOT NULL,
-                                         plan_id integer(10) NOT NULL,
-                                         PRIMARY KEY (ex_id,
-                                                      plan_id),
-                                         FOREIGN KEY(ex_id) REFERENCES exercises(id),
-                                         FOREIGN KEY(plan_id) REFERENCES workout_plans(id));
+                           FOREIGN KEY(ex_type_id) REFERENCES exercise_types(id),
+                           FOREIGN KEY(w_id) REFERENCES workouts(id),
+                           FOREIGN KEY(wp_id) REFERENCES workout_plans(id));
 CREATE TABLE sets (
                       id         INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                       ex_id      integer(10) NOT NULL,
@@ -52,13 +49,6 @@ CREATE TABLE workouts (
                           id         INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                           user_id    integer(10) NOT NULL,
                           start_date date NOT NULL,
+                          start_time time NOT NULL,
                           end_time   time NOT NULL,
                           FOREIGN KEY(user_id) REFERENCES users(id));
-CREATE TABLE workouts_exercises (
-                                    workout_id integer(10) NOT NULL,
-                                    ex_id      integer(10) NOT NULL,
-                                    PRIMARY KEY (workout_id,
-                                                 ex_id),
-                                    FOREIGN KEY(workout_id) REFERENCES workouts(id),
-                                    FOREIGN KEY(ex_id) REFERENCES exercises(id));
-

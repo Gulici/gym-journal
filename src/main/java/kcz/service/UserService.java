@@ -43,7 +43,7 @@ public class UserService {
         List<UserStat> userStats =  userStatDao.getStats(user);
         user.setUserStats(userStats);
 
-        List<Workout> workouts = workout
+//        List<Workout> workouts = workout;
 
 
         return userDao.getUser(username);

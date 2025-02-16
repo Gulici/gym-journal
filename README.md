@@ -31,4 +31,4 @@ SQLite was chosen as the database for being **lightweight, self-contained, and s
 - Monitor personal records & progress over time
 
 ## Database project
-<img src="pictures/erd.png" alt="Opis obrazka" width="600">
+<img src="pictures/erd_1602.png" alt="Opis obrazka" width="800">
