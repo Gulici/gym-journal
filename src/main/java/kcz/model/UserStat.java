@@ -1,15 +1,15 @@
 package kcz.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class UserStat {
     private int id;
     private User user;
     private int weight;
     private int height;
-    private Date date;
+    private LocalDate date;
 
-    public UserStat(User user, int weight, int height, Date date) {
+    public UserStat(User user, int weight, int height, LocalDate date) {
         this.user = user;
         this.weight = weight;
         this.height = height;
@@ -51,11 +51,11 @@ public class UserStat {
         this.height = height;
     }
 
-    public Date getDate() {
+    public LocalDate getDateCreate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDateCreate(LocalDate date) {
         this.date = date;
     }
 }

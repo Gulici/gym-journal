@@ -12,9 +12,9 @@ public class UserService {
     private UserDao userDao;
     private UserStatDao userStatDao;
 
-    public UserService(UserDao userDao, UserStatDao userStatDao) {
-        this.userDao = userDao;
-        this.userStatDao = userStatDao;
+    public UserService() {
+        this.userDao = new UserDao();
+        this.userStatDao = new UserStatDao();
     }
 
     public boolean createUser(String username) {
@@ -46,6 +46,13 @@ public class UserService {
 //        List<Workout> workouts = workout;
 
 
-        return userDao.getUser(username);
+        return user;
+    }
+
+    public List<UserStat> getUserStats(User user) {
+        if(user == null) {
+            return null;
+        }
+        return userStatDao.getStats(user);
     }
 }

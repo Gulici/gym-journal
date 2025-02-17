@@ -10,11 +10,10 @@ public class WorkoutPlan {
 
     private List<Exercise> exercises;
 
-    public WorkoutPlan(User user, String name, String comment, List<Exercise> exercises) {
+    public WorkoutPlan(User user, String name, String comment) {
         this.user = user;
         this.name = name;
         this.comment = comment;
-        this.exercises = exercises;
     }
 
     public WorkoutPlan() {

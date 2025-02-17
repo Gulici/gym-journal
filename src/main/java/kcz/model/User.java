@@ -19,7 +19,6 @@ public class User {
     }
 
     public User() {
-        userStats = new ArrayList<>();
     }
 
     public int getId() {

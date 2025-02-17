@@ -3,25 +3,24 @@ package kcz.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Workout {
     private int id;
     private User user;
     private LocalDate startDate;
+    private LocalTime startTime;
     private LocalTime endTime;
     private List<Exercise> exercises;
 
-    public Workout(User user, LocalDate startDate, LocalTime endTime, List<Exercise> exercises) {
+    public Workout(User user, LocalDate startDate, LocalTime startTime, LocalTime endTime) {
         this.user = user;
         this.startDate = startDate;
+        this.startTime = startTime;
         this.endTime = endTime;
-        this.exercises = exercises;
     }
 
     public Workout() {
-        exercises = new ArrayList<>();
     }
 
     public int getId() {
@@ -62,5 +61,13 @@ public class Workout {
 
     public void setExercises(List<Exercise> exercises) {
         this.exercises = exercises;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
     }
 }
