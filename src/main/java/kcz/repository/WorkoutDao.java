@@ -5,6 +5,10 @@ import kcz.model.User;
 import kcz.model.Workout;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,9 +80,18 @@ public class WorkoutDao extends Dao {
                 Workout workout = new Workout();
                 workout.setId(rs.getInt("id"));
                 workout.setUser(user);
-                workout.setStartDate(rs.getDate("start_date").toLocalDate());
-                workout.setStartTime(rs.getTime("start_time").toLocalTime());
-                workout.setEndTime(rs.getTime("end_time").toLocalTime());
+
+                String startDateStr = rs.getString("start_date");
+                LocalDate startDate = LocalDate.parse(startDateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                workout.setStartDate(startDate);
+
+                String startTimeStr = rs.getString("start_time");
+                LocalTime startTime = LocalTime.parse(startTimeStr, DateTimeFormatter.ofPattern("HH:mm"));
+                workout.setStartTime(startTime);
+
+                String endTimeStr = rs.getString("end_time");
+                LocalTime endTime = LocalTime.parse(endTimeStr, DateTimeFormatter.ofPattern("HH:mm"));
+                workout.setEndTime(endTime);
                 workouts.add(workout);
             }
         }catch (SQLException e) {

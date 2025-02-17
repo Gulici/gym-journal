@@ -20,7 +20,7 @@ public class UserStatDao extends Dao {
             ps.setInt(1,userStat.getUser().getId());
             ps.setInt(2,userStat.getWeight());
             ps.setInt(3,userStat.getHeight());
-            ps.setDate(4, Date.valueOf(userStat.getDateCreate()));
+            ps.setString(4, Date.valueOf(userStat.getDateCreate()).toString());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -52,5 +52,16 @@ public class UserStatDao extends Dao {
             throw new RuntimeException(e);
         }
         return stats;
+    }
+
+    public void removeUserStat(int id) {
+        String sql = "delete from user_stats where id=?";
+        try(Connection con = getConnection()) {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1,id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

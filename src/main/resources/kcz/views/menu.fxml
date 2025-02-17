@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="kcz.controller.MenuController">
+    <children>
+        <VBox alignment="CENTER" spacing="15" prefWidth="300" prefHeight="200">
+            <Button text="User Stats" onAction="#openUserStats"/>
+            <Button text="New workout" onAction="#openNewWorkout"/>
+            <Button text="Workout History" onAction="#openWorkouts"/>
+            <Button text="Manage Exercises" onAction="#openExercises"/>
+            <Button text="Logout" onAction="#handleLogout"/>
+        </VBox>
+    </children>
+</AnchorPane>
+

@@ -1,11 +1,14 @@
 package kcz.service;
 
+import kcz.Main;
 import kcz.model.User;
 import kcz.model.UserStat;
 import kcz.model.Workout;
 import kcz.repository.UserDao;
 import kcz.repository.UserStatDao;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class UserService {
@@ -17,8 +20,9 @@ public class UserService {
         this.userStatDao = new UserStatDao();
     }
 
-    public boolean createUser(String username) {
+    public boolean createUser(User newUser) {
         boolean result = false;
+        String username = newUser.getUsername();
         if(username == null || username.isEmpty()) {
             return false;
         }
@@ -27,6 +31,7 @@ public class UserService {
             User user = new User();
             user.setUsername(username);
             userDao.addUser(user);
+            result = true;
         }
         return result;
     }
@@ -54,5 +59,17 @@ public class UserService {
             return null;
         }
         return userStatDao.getStats(user);
+    }
+
+    public void addUserStat(UserStat userStat) {
+        userStat.setDateCreate(LocalDate.now());
+        userStat.setUser(Main.currentUser);
+        userStatDao.createUserStat(userStat);
+    }
+
+    public void removeUserStat(UserStat stat) {
+        userStatDao.removeUserStat(stat.getId());
+        // reload list in user instance
+        Main.currentUser.setUserStats(userStatDao.getStats(Main.currentUser));
     }
 }

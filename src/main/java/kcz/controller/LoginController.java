@@ -57,7 +57,7 @@ public class LoginController implements Initializable {
         Main.currentUser = user;
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/kcz/views/userStats.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/kcz/views/menu.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
