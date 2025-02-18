@@ -36,6 +36,15 @@ public class MenuController {
     }
 
     public void openNewWorkout(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/kcz/views/newWorkout.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void openWorkouts(ActionEvent actionEvent) {

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox prefHeight="82.0" prefWidth="247.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox prefHeight="96.0" prefWidth="248.0">
+        <Label fx:id="nameLabel" prefHeight="25.0" prefWidth="254.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="placeholder" />
+
+        <HBox prefHeight="25.0" prefWidth="253.0" spacing="5">
+            <TextField fx:id="repsField" prefWidth="80" promptText="Powtórzenia" />
+            <TextField fx:id="weightField" prefHeight="21.0" prefWidth="80" promptText="Ciężar (kg)" />
+            <Button fx:id="addSetButton" text="Dodaj" />
+        </HBox>
+        <ListView fx:id="setListView" prefHeight="30.0" prefWidth="248.0" />
+    </VBox>
+</HBox>
